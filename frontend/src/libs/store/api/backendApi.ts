@@ -16,7 +16,7 @@ export const backendApi = createApi({
         sendFeedback: build.mutation<void, IFeedbackRequest>(
             {
                 query: (body: IFeedbackRequest) => ({
-                    url: '/feedback',
+                    url: '/feedback/',
                     method: 'POST',
                     body
                 })
