@@ -1,0 +1,46 @@
+networks:
+  dev:
+
+
+services:
+
+  frontend:
+    build:
+      context: ./frontend
+    networks:
+      - dev
+    depends_on:
+      - backend
+    ports:
+      - "80:3000"
+
+  backend:
+    build:
+      context: ./backend
+    networks:
+      - dev
+    environment:
+      - BOT_TOKEN=7524614461:AAERyEKMsWX4G2Yd1YZ0bVGtcGRP0RTgBzg
+      - DATABASE_URL=postgresql+psycopg2://postgres:25050032@db:5432/klimatvrn
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 25050032
+      POSTGRES_DB: klimatvrn
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dev
+
+volumes:
+  postgres_data:
