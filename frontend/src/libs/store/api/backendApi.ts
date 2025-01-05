@@ -5,7 +5,7 @@ import {IFeedbackRequest} from "@/libs/store/api/feedback/IFeedbackRequest";
 export const backendApi = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:8000/api',
+        baseUrl: 'https://remont-split-vrn.ru/api',
         prepareHeaders: (headers) => {
             headers.append('Accept', 'application/json');
             headers.append('Content-Type', 'application/json');
